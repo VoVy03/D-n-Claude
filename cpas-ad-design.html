@@ -1,0 +1,589 @@
+<title>MOCHA CPAS Ad</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&family=Noto+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap">
+
+<style>
+  :root {
+    --deep: #0F3B6B;
+    --blue: #1A5A9E;
+    --mid: #3B7DD8;
+    --light: #8BB8E8;
+    --pale: #C5D8EE;
+    --bg-a: #E2E8F2;
+    --bg-b: #EEF1F7;
+    --txt: #1A1D2E;
+    --txt2: #3A4055;
+    --grey: #6B7280;
+    --white: #FFFFFF;
+    --teal: #1D8B72;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg-a: #E2E8F2;
+      --bg-b: #EEF1F7;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg-a: #E2E8F2;
+    --bg-b: #EEF1F7;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: #D8DCE4;
+    font-family: 'Noto Sans', system-ui, sans-serif;
+  }
+
+  .canvas {
+    container-type: inline-size;
+    width: min(calc(100vw - 1.5rem), calc(100vh - 1.5rem), 1080px);
+    aspect-ratio: 1;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(145deg, var(--bg-a) 0%, var(--bg-b) 55%, #F2F4F9 100%);
+    box-shadow: 0 8px 40px rgba(15,59,107,0.12);
+  }
+
+  /* ── Decorative blobs ── */
+  .deco {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  .deco-1 {
+    width: 38cqw; height: 38cqw;
+    top: -10cqw; left: -12cqw;
+    background: radial-gradient(circle, rgba(26,90,158,0.06) 0%, transparent 70%);
+  }
+  .deco-2 {
+    width: 30cqw; height: 30cqw;
+    bottom: -8cqw; right: -6cqw;
+    background: radial-gradient(circle, rgba(59,125,216,0.07) 0%, transparent 70%);
+  }
+  .deco-3 {
+    width: 18cqw; height: 18cqw;
+    top: 42cqw; right: 10cqw;
+    background: radial-gradient(circle, rgba(139,184,232,0.08) 0%, transparent 70%);
+  }
+
+  /* Subtle molecular dots like Image 2/3 */
+  .dot {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(26,90,158,0.06);
+    pointer-events: none;
+  }
+  .dot-1 { width: 3.5cqw; height: 3.5cqw; top: 18cqw; left: 42cqw; }
+  .dot-2 { width: 2cqw; height: 2cqw; top: 22cqw; left: 46cqw; }
+  .dot-3 { width: 4cqw; height: 4cqw; bottom: 20cqw; right: 42cqw; }
+  .dot-4 { width: 2.5cqw; height: 2.5cqw; bottom: 16cqw; right: 38cqw; }
+  .dot-5 { width: 1.8cqw; height: 1.8cqw; top: 48cqw; left: 8cqw; }
+
+  /* ── Deal sections ── */
+  .deal {
+    position: absolute;
+    display: flex;
+    align-items: flex-start;
+  }
+
+  .deal-01 {
+    top: 7cqw;
+    left: 3cqw;
+    right: 3cqw;
+    height: 42cqw;
+  }
+
+  .deal-02 {
+    bottom: 3cqw;
+    left: 3cqw;
+    right: 3cqw;
+    height: 44cqw;
+  }
+
+  /* ── Product areas ── */
+  .products-01 {
+    position: relative;
+    width: 46cqw;
+    height: 100%;
+    flex-shrink: 0;
+  }
+
+  .products-02 {
+    position: relative;
+    width: 50cqw;
+    height: 100%;
+    flex-shrink: 0;
+    margin-left: auto;
+  }
+
+  .product-svg {
+    position: absolute;
+    filter: drop-shadow(0 4px 12px rgba(15,59,107,0.12));
+  }
+
+  /* ── Deal info blocks ── */
+  .info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 1cqw 2cqw;
+  }
+
+  .info-01 {
+    margin-left: auto;
+    text-align: left;
+    padding-top: 3cqw;
+  }
+
+  .info-02 {
+    text-align: left;
+    padding-top: 2cqw;
+  }
+
+  /* ── MUA label ── */
+  .mua-label {
+    font-family: 'Montserrat', sans-serif;
+    color: var(--txt);
+    line-height: 1.1;
+    margin-bottom: 1.2cqw;
+  }
+  .mua-label .mua-text {
+    font-size: 3.2cqw;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+  }
+  .mua-label .mua-num {
+    font-size: 5.5cqw;
+    font-weight: 900;
+    color: var(--deep);
+    margin-left: 0.5cqw;
+  }
+
+  /* ── Product name ── */
+  .product-name {
+    font-family: 'Noto Sans', sans-serif;
+    font-size: 2.6cqw;
+    font-weight: 600;
+    color: var(--txt);
+    line-height: 1.35;
+    margin-bottom: 1.8cqw;
+  }
+  .product-name strong {
+    font-weight: 700;
+  }
+
+  /* ── Pricing ── */
+  .pricing {
+    display: flex;
+    align-items: center;
+    gap: 1.2cqw;
+    margin-bottom: 2cqw;
+    flex-wrap: wrap;
+  }
+  .price-old {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.2cqw;
+    font-weight: 600;
+    color: var(--grey);
+    text-decoration: line-through;
+    text-decoration-thickness: 1.5px;
+    background: rgba(107,114,128,0.08);
+    padding: 0.4cqw 1cqw;
+    border-radius: 0.4cqw;
+  }
+  .price-new {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.6cqw;
+    font-weight: 800;
+    color: var(--white);
+    background: var(--blue);
+    padding: 0.5cqw 1.2cqw;
+    border-radius: 0.5cqw;
+  }
+
+  /* ── Gift section ── */
+  .gift-section {
+    margin-top: 0.5cqw;
+  }
+  .gift-label {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.2cqw;
+    font-weight: 700;
+    color: var(--deep);
+    margin-bottom: 0.6cqw;
+  }
+  .gift-label .gift-num {
+    font-size: 3.2cqw;
+    font-weight: 900;
+    color: var(--deep);
+    margin-left: 0.3cqw;
+  }
+  .gift-item {
+    font-family: 'Noto Sans', sans-serif;
+    font-size: 2cqw;
+    font-weight: 500;
+    color: var(--txt2);
+    line-height: 1.5;
+  }
+
+  /* ── Gift badges (circular) ── */
+  .badge {
+    position: absolute;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    box-shadow: 0 3px 16px rgba(15,59,107,0.2);
+  }
+  .badge-01 {
+    width: 13cqw;
+    height: 13cqw;
+    top: 6cqw;
+    left: 29cqw;
+    background: linear-gradient(135deg, var(--blue) 0%, var(--mid) 100%);
+  }
+  .badge-02 {
+    width: 13cqw;
+    height: 13cqw;
+    bottom: 14cqw;
+    right: 44cqw;
+    background: linear-gradient(135deg, var(--blue) 0%, var(--mid) 100%);
+  }
+  .badge-text {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.8cqw;
+    font-weight: 700;
+    color: var(--white);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    line-height: 1;
+  }
+  .badge-value {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 3.2cqw;
+    font-weight: 900;
+    color: var(--white);
+    line-height: 1;
+    margin-top: 0.2cqw;
+  }
+
+  /* ── Divider ── */
+  .divider {
+    position: absolute;
+    left: 8cqw;
+    right: 8cqw;
+    top: 50%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, rgba(26,90,158,0.12) 20%, rgba(26,90,158,0.12) 80%, transparent 100%);
+  }
+
+  /* ── SVG text styling ── */
+  .svg-brand {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+  .svg-label {
+    font-family: 'Noto Sans', sans-serif;
+    font-weight: 600;
+  }
+  .svg-sub {
+    font-family: 'Noto Sans', sans-serif;
+    font-weight: 400;
+  }
+
+  /* ── Brand header ── */
+  .brand-header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5.5cqw;
+    background: linear-gradient(90deg, var(--deep) 0%, var(--blue) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2cqw;
+    z-index: 5;
+  }
+  .brand-name {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.4cqw;
+    font-weight: 900;
+    color: var(--white);
+    letter-spacing: 0.18em;
+  }
+  .brand-sep {
+    width: 1px;
+    height: 2.4cqw;
+    background: rgba(255,255,255,0.35);
+  }
+  .brand-tagline {
+    font-family: 'Noto Sans', sans-serif;
+    font-size: 1.1cqw;
+    font-weight: 500;
+    color: rgba(255,255,255,0.85);
+    letter-spacing: 0.04em;
+  }
+</style>
+
+<div class="canvas">
+  <!-- Decorative elements -->
+  <div class="deco deco-1"></div>
+  <div class="deco deco-2"></div>
+  <div class="deco deco-3"></div>
+  <div class="dot dot-1"></div>
+  <div class="dot dot-2"></div>
+  <div class="dot dot-3"></div>
+  <div class="dot dot-4"></div>
+  <div class="dot dot-5"></div>
+
+  <!-- Subtle divider between deals -->
+  <div class="divider"></div>
+
+  <!-- ═══════ GIFT BADGES ═══════ -->
+  <div class="badge badge-01">
+    <span class="badge-text">Tặng</span>
+    <span class="badge-value">145K</span>
+  </div>
+  <div class="badge badge-02">
+    <span class="badge-text">Tặng</span>
+    <span class="badge-value">145K</span>
+  </div>
+
+  <!-- ═══════ Brand header bar ═══════ -->
+  <div class="brand-header">
+    <span class="brand-name">MOCHA</span>
+    <div class="brand-sep"></div>
+    <span class="brand-tagline">NATURAL DERMA EFFECT</span>
+  </div>
+
+  <!-- ═══════ MUA 01 — Bio-Active Cleanser 300g ═══════ -->
+  <div class="deal deal-01">
+
+    <!-- Product illustration: Bio-Active Cleanser pump bottle -->
+    <div class="products-01">
+      <svg class="product-svg" viewBox="0 0 240 420" xmlns="http://www.w3.org/2000/svg"
+           style="left: 8cqw; top: 1cqw; width: 28cqw; height: auto;">
+        <defs>
+          <linearGradient id="bg1" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#145090"/>
+            <stop offset="35%" stop-color="#1E6AB8"/>
+            <stop offset="65%" stop-color="#2874C0"/>
+            <stop offset="100%" stop-color="#145090"/>
+          </linearGradient>
+          <linearGradient id="pump1" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#E8E8E8"/>
+            <stop offset="100%" stop-color="#CCCCCC"/>
+          </linearGradient>
+          <linearGradient id="cap1" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#F0F0F0"/>
+            <stop offset="100%" stop-color="#D8D8D8"/>
+          </linearGradient>
+        </defs>
+
+        <!-- Pump head -->
+        <rect x="80" y="10" width="80" height="40" rx="8" fill="url(#cap1)"/>
+        <!-- Nozzle pointing left -->
+        <rect x="14" y="18" width="74" height="16" rx="8" fill="url(#pump1)"/>
+        <circle cx="14" cy="26" r="5" fill="#D0D0D0"/>
+        <!-- Pump neck -->
+        <rect x="105" y="48" width="30" height="40" rx="4" fill="#C0C0C0"/>
+
+        <!-- Bottle body -->
+        <rect x="38" y="86" width="164" height="314" rx="18" fill="url(#bg1)"/>
+
+        <!-- Label circle emblem -->
+        <circle cx="120" cy="195" r="46" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="2.5"/>
+        <circle cx="120" cy="195" r="40" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+        <!-- Cera-B Complex arc text (simplified) -->
+        <text x="120" y="178" text-anchor="middle" fill="rgba(255,255,255,0.8)" class="svg-sub" font-size="9" letter-spacing="0.12em">• CERA-B COMPLEX •</text>
+
+        <!-- 5.5 pH -->
+        <text x="120" y="203" text-anchor="middle" fill="white" class="svg-brand" font-size="28">5.5</text>
+        <text x="120" y="222" text-anchor="middle" fill="rgba(255,255,255,0.9)" class="svg-brand" font-size="16">pH</text>
+
+        <!-- Product name on bottle -->
+        <text x="120" y="265" text-anchor="middle" fill="white" class="svg-brand" font-size="11" letter-spacing="0.06em">MOCHA</text>
+        <text x="120" y="290" text-anchor="middle" fill="white" class="svg-label" font-size="14">Bio-Active</text>
+        <text x="120" y="310" text-anchor="middle" fill="white" class="svg-label" font-size="14">Cleanser</text>
+        <text x="120" y="332" text-anchor="middle" fill="rgba(255,255,255,0.7)" class="svg-sub" font-size="10">Cera-B Complex</text>
+
+        <!-- Certification badges area -->
+        <circle cx="72" cy="365" r="10" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1"/>
+        <circle cx="100" cy="365" r="10" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1"/>
+        <circle cx="128" cy="365" r="10" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1"/>
+        <circle cx="156" cy="365" r="10" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1"/>
+
+        <!-- Weight -->
+        <text x="120" y="396" text-anchor="middle" fill="rgba(255,255,255,0.6)" class="svg-sub" font-size="11">300g</text>
+      </svg>
+
+      <!-- Small UV-Block Plus (gift visual) -->
+      <svg class="product-svg" viewBox="0 0 100 200" xmlns="http://www.w3.org/2000/svg"
+           style="left: 32cqw; top: 22cqw; width: 10cqw; height: auto;">
+        <defs>
+          <linearGradient id="uv1" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#4A8FD4"/>
+            <stop offset="50%" stop-color="#6AABE8"/>
+            <stop offset="100%" stop-color="#3A7CC0"/>
+          </linearGradient>
+        </defs>
+        <rect x="12" y="8" width="76" height="28" rx="10" fill="#E8E8E8"/>
+        <rect x="15" y="34" width="70" height="148" rx="12" fill="url(#uv1)"/>
+        <text x="50" y="75" text-anchor="middle" fill="white" class="svg-brand" font-size="10" letter-spacing="0.06em">UV-BLOCK</text>
+        <text x="50" y="92" text-anchor="middle" fill="white" class="svg-brand" font-size="10">PLUS</text>
+        <rect x="25" y="105" width="50" height="18" rx="4" fill="rgba(255,255,255,0.2)"/>
+        <text x="50" y="118" text-anchor="middle" fill="white" class="svg-brand" font-size="12">SPF 50</text>
+        <text x="50" y="150" text-anchor="middle" fill="rgba(255,255,255,0.7)" class="svg-sub" font-size="9">15g</text>
+      </svg>
+    </div>
+
+    <!-- Deal info -->
+    <div class="info info-01">
+      <div class="mua-label">
+        <span class="mua-text">MUA</span>
+        <span class="mua-num">01</span>
+      </div>
+      <div class="product-name">
+        Sữa Rửa Mặt<br>
+        <strong>Bio-Active Cleanser 300g</strong>
+      </div>
+      <div class="pricing">
+        <span class="price-old">399.000VND</span>
+        <span class="price-new">279.000VND</span>
+      </div>
+      <div class="gift-section">
+        <div class="gift-label">
+          TẶNG <span class="gift-num">01</span>
+        </div>
+        <div class="gift-item">
+          Kem Chống Nắng UV-Block Plus 15g
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════ MUA 02 — Combo Smart Target + Bio-Active ═══════ -->
+  <div class="deal deal-02">
+
+    <!-- Deal info -->
+    <div class="info info-02">
+      <div class="mua-label">
+        <span class="mua-text">MUA</span>
+        <span class="mua-num">02</span>
+      </div>
+      <div class="product-name">
+        <strong>Gel Trị Mụn Smart Target</strong><br>
+        <strong>Sữa Rửa Mặt Bio-Active</strong>
+      </div>
+      <div class="pricing">
+        <span class="price-old">699.000VND</span>
+        <span class="price-new">449.000VND</span>
+      </div>
+      <div class="gift-section">
+        <div class="gift-label">
+          TẶNG <span class="gift-num">01</span>
+        </div>
+        <div class="gift-item">
+          Kem Chống Nắng UV-Block Plus 15g
+        </div>
+      </div>
+    </div>
+
+    <!-- Product illustrations: Smart Target + Bio-Active Cleanser + UV-Block -->
+    <div class="products-02">
+
+      <!-- Smart Target Clearing Solution tube -->
+      <svg class="product-svg" viewBox="0 0 160 380" xmlns="http://www.w3.org/2000/svg"
+           style="right: 32cqw; top: 1cqw; width: 14cqw; height: auto;">
+        <defs>
+          <linearGradient id="tube2" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#EAE5DC"/>
+            <stop offset="40%" stop-color="#FAF8F4"/>
+            <stop offset="100%" stop-color="#E0DCD4"/>
+          </linearGradient>
+        </defs>
+        <!-- Pointed applicator tip -->
+        <path d="M80,0 L95,50 L65,50 Z" fill="#B0B0B0"/>
+        <ellipse cx="80" cy="50" rx="18" ry="8" fill="#C0C0C0"/>
+
+        <!-- Tube body -->
+        <rect x="28" y="48" width="104" height="280" rx="16" fill="url(#tube2)"/>
+
+        <!-- Green accent stripe -->
+        <rect x="28" y="135" width="104" height="5" fill="var(--teal)"/>
+
+        <!-- Brand text -->
+        <text x="80" y="90" text-anchor="middle" fill="#444" class="svg-brand" font-size="12" letter-spacing="0.1em">MOCHA</text>
+
+        <!-- Product name -->
+        <text x="80" y="160" text-anchor="middle" fill="var(--teal)" class="svg-brand" font-size="14">SMART</text>
+        <text x="80" y="178" text-anchor="middle" fill="var(--teal)" class="svg-brand" font-size="14">TARGET</text>
+        <text x="80" y="200" text-anchor="middle" fill="#888" class="svg-sub" font-size="8" letter-spacing="0.06em">CLEARING SOLUTION</text>
+
+        <!-- Descriptive elements -->
+        <text x="80" y="235" text-anchor="middle" fill="#666" class="svg-sub" font-size="8">QUICKLY ACNE-CARE GEL</text>
+        <circle cx="55" cy="260" r="12" fill="none" stroke="rgba(29,139,114,0.3)" stroke-width="1.5"/>
+        <text x="55" y="264" text-anchor="middle" fill="var(--teal)" class="svg-brand" font-size="10">3×</text>
+
+        <!-- Bottom cap -->
+        <rect x="24" y="318" width="112" height="36" rx="12" fill="#D8D4CC"/>
+      </svg>
+
+      <!-- Bio-Active Cleanser (medium, behind) -->
+      <svg class="product-svg" viewBox="0 0 200 380" xmlns="http://www.w3.org/2000/svg"
+           style="right: 14cqw; top: 2cqw; width: 18cqw; height: auto;">
+        <defs>
+          <linearGradient id="bg2" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#145090"/>
+            <stop offset="35%" stop-color="#1E6AB8"/>
+            <stop offset="65%" stop-color="#2874C0"/>
+            <stop offset="100%" stop-color="#145090"/>
+          </linearGradient>
+          <linearGradient id="pump2" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#E8E8E8"/>
+            <stop offset="100%" stop-color="#CCCCCC"/>
+          </linearGradient>
+        </defs>
+        <rect x="68" y="8" width="64" height="32" rx="6" fill="#E8E8E8"/>
+        <rect x="12" y="14" width="62" height="14" rx="7" fill="url(#pump2)"/>
+        <circle cx="12" cy="21" r="4" fill="#C8C8C8"/>
+        <rect x="90" y="38" width="22" height="32" rx="3" fill="#C0C0C0"/>
+        <rect x="32" y="68" width="136" height="294" rx="16" fill="url(#bg2)"/>
+        <circle cx="100" cy="175" r="36" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="2"/>
+        <text x="100" y="172" text-anchor="middle" fill="white" class="svg-brand" font-size="22">5.5</text>
+        <text x="100" y="192" text-anchor="middle" fill="rgba(255,255,255,0.9)" class="svg-brand" font-size="13">pH</text>
+        <text x="100" y="240" text-anchor="middle" fill="white" class="svg-label" font-size="11">Bio-Active</text>
+        <text x="100" y="258" text-anchor="middle" fill="white" class="svg-label" font-size="11">Cleanser</text>
+        <text x="100" y="280" text-anchor="middle" fill="rgba(255,255,255,0.6)" class="svg-sub" font-size="8">Cera-B Complex</text>
+      </svg>
+
+      <!-- Small UV-Block Plus (gift) -->
+      <svg class="product-svg" viewBox="0 0 100 200" xmlns="http://www.w3.org/2000/svg"
+           style="right: 2cqw; top: 20cqw; width: 8cqw; height: auto;">
+        <defs>
+          <linearGradient id="uv2" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#4A8FD4"/>
+            <stop offset="50%" stop-color="#6AABE8"/>
+            <stop offset="100%" stop-color="#3A7CC0"/>
+          </linearGradient>
+        </defs>
+        <rect x="12" y="8" width="76" height="28" rx="10" fill="#E8E8E8"/>
+        <rect x="15" y="34" width="70" height="148" rx="12" fill="url(#uv2)"/>
+        <text x="50" y="75" text-anchor="middle" fill="white" class="svg-brand" font-size="10">UV-BLOCK</text>
+        <text x="50" y="92" text-anchor="middle" fill="white" class="svg-brand" font-size="10">PLUS</text>
+        <rect x="25" y="105" width="50" height="18" rx="4" fill="rgba(255,255,255,0.2)"/>
+        <text x="50" y="118" text-anchor="middle" fill="white" class="svg-brand" font-size="12">SPF 50</text>
+        <text x="50" y="150" text-anchor="middle" fill="rgba(255,255,255,0.7)" class="svg-sub" font-size="9">15g</text>
+      </svg>
+    </div>
+  </div>
+</div>
